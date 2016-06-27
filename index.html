@@ -44,7 +44,7 @@
       <section>
         <h1>Migrasi Server Zimbra dan Transfer Account Zimbra – The Best Way </h1>
 
-        <p>1. Pendahuluan</p>
+        <p><b>1. Pendahuluan</b></p>
 
         <p>Project Zimbra tidak memiliki dokumentasi sebuah cross migration atau transfer account yang baik. Yang mereka sarankan adalah dengan cara meng-copy folder /opt/zimbra ke server baru anda. Tetapi bagaimana jika file-file tersebut sudah terinfeksi dengan rootkit atau malicious script lainnya?, maka server baru kita akan ter-compromised. Jadi jangan pernah sync atau copy keseluruhan direktori dari folder instalasi zimbra kita. Zimbra juga menganjurkan kita untuk meng-upgrade production server kita ke versi terakhir sebelum melakukan migrasi. Tetapi dengan cara yang tidak tepat kita dapat teresiko kehilangan data. Dengan cara berikut anda dapat:
 
@@ -54,7 +54,7 @@ Tidak akan ada interupsi di sisi production server seperti software upgrade atau
 Migrasi zimbra dari versi lama ke versi yang lebih baru
 Cross migration Zimbra tanpa harus meng-copy keseluruhan direktori.</p>
 
-        <p>2. Requirement</p>
+        <p><b>2. Requirement</b></p>
 
         <p> Anda memerlukan server lama anda dengan akun zimbra dan sebuah server baru dengan OS yang anda inginkan. Jangan membuat menciptakan konfigurasi atau setting apapun pada server baru anda. Pastikan anda mengkonfigurasikan hostname server baru anda sama dengan server yang lama.
 
@@ -68,7 +68,7 @@ Membutuhkan login ssh root
 Membutuhkan login zimbra admin
 Kapasitas HDD yang cukup untuk menyimpan backup
 
-        <p>3. Presetup</p>
+        <p><b>3. Presetup</b></p>
 <p>Anda perlu untuk mengkonfigurasikan sebuah ssh key dari akun root server baru ke akun root server yang lama.
 Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task pada peek hour.
 
