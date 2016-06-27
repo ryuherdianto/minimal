@@ -4,6 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Life is Innovation</title>
+    <style>
+    div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+</style>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -75,8 +90,8 @@
 Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task pada peek hour.
 
 Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
-<p style=”padding: 10px; color: black; background-color: yellow; border: black 1px solid”><font size="2">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
-<br/>[root@zimbra ~]# su - zimbra</font></p>
+<div class="transbox"><font size="2">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
+<br/>[root@zimbra ~]# su - zimbra</font></div></p>
 
 
       <footer>
