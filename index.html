@@ -93,6 +93,10 @@ Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai te
 <div class="transbox"><font size="3">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
 <br/>[root@zimbra ~]# su - zimbra</font></div></p>
 
+<p>Semua langkah yang dilakukan pada server Zimbra anda harus dilakukan sebagai user Zimbra sendiri, jika tidak maka anda akan mendapatkan error permission dan masalah ownership pada server zimbra anda</p>
+
+        <p><b>4. Backup semua data dari Server Lama</b></p>
+<p>Kita akan meng-copy semua data dari server lama tanpa mengganggu services zimbra.</p>
 
       <footer>
         <p></p>
