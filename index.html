@@ -131,6 +131,30 @@ div.transbox p {
         <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ mkdir userpass</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov  -l ga $i userPassword | grep userPassword: | awk '{ print $2}' > userpass/$i.shadow; done
           <br/></font></div>
       
+        <p><b>4.7 Backup semua user name , Display name dan Given Name</b></p>
+        <p>Zimbra dapat menerima sebuah Name dan Disaplay names pada akun email dalam proses pembuatan akunnya. Jadi kita harus me-restore kembali data tersebut. Kita akan membuat sebuah directori dengan nama userdata/ yang berisi detail-detail dari tiap akun tersebut</p>
+        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ mkdir userdata</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov ga $i  | grep -i Name: > userdata/$i.txt ; done
+          <br/></font></div>
+          
+        <p><b>4.8 Sekarang backup semua akun email</b></p>
+        <p>Proses ini akan banyak menyita waktu untuk mem-backup semua akun-akun email anda. Jadi pastikan anda menjalankan utilitas “screen”. Sebuah file tgz akan dibuat untuk setiap nama email. Kita akan menggunakan file tersebut untuk men-transfer akun email.</p>
+        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ for email in `cat /backups/zmigrate/emails.txt`; do for i in `cat ../emails.txt `; do zmmailbox -z -m $i getRestURL '/?fmt=tgz' > $i.tgz ;  echo $email ; done</br>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com
+          <br/></font></div>
+          
+        <p>This tgz files contains</p>
+        <ul>
+        <li>Mail</li>
+        <li>Contacts</li>
+        <li>Calendars</li>
+        <li>Briefcase</li>
+        <li>Tasks</li>
+        <li>Searches</li>
+        <li>Tags</li>
+        <li>Folders</li>
+        </ul>
+        
+        <p>Semua subfolder akan termasuk, kecuali Junk dan Trash. </p>
+          
       <footer>
         <p></p>
       </footer>
