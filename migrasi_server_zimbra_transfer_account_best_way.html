@@ -72,7 +72,7 @@ div.transbox p {
 
         <font color="black"><p><b>2. Requirement</b></p></font>
 
-        <p> Anda memerlukan server lama anda dengan akun zimbra dan sebuah server baru dengan OS yang anda inginkan. Jangan membuat menciptakan konfigurasi atau setting apapun pada server baru anda. Pastikan anda mengkonfigurasikan hostname server baru anda sama dengan server yang lama.</p>
+        <p> Anda memerlukan server lama anda dengan akun zimbra dan sebuah server baru dengan OS yang anda inginkan. Jangan membuat menciptakan konfigurasi atau setting apapun pada server baru anda. Pastikan anda mengkonfigurasikan hostname server baru anda sama dengan server yang lama. Anda dapat gunakan script <a href="https://github.com/ryuherdianto/ryuherdianto.github.io/blob/master/scripts/presetup-zimbra-centos7.sh">berikut</a> untuk mempercepat penamaan hostname.</p>
 <ul>
 <li>Server lama</li>
 <li>Membutuhkan login ssh root</li>
@@ -87,7 +87,7 @@ div.transbox p {
 
         <font color="black"><p><b>3. Presetup</b></p></font>
         <p>Anda perlu untuk mengkonfigurasikan sebuah ssh key dari akun root server baru ke akun root server yang lama.
-        Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task tidak pada peek hour.
+        Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task tidak pada peak hour.
 
         Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
         <div class="transbox"><font size="2" face="courier new">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
