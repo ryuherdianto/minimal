@@ -120,6 +120,17 @@ div.transbox p {
         <p>Anda harus mendapatkan semua distributions list dan menyimpannya dalam sebuah file bernama distributinlist.txt.</p>
         <div class="transbox"><font size="3">zimbra@zimbra:~$ zmprov gadl > /backups/zmigrate/distributinlist.txt</br>zimbra@zimbra:~$ cat /backups/zmigrate/distributinlist.txt
           <br/>finance@medianet.com<br/>sales@medianet.com<br/>info@medianet.com<br/>zimbra@zimbra:~$</font></div>
+      
+        <p><b>4.5 Dapatkan semua member dalam distribution list</b></p>
+        <p>Dalam langkah ini kita akan mendapatkan semua member pada tiap distribution list ini. Kita akan membuat sebuah folder bernama distributinlist_members dan membuat sebuah file dalam folder ini dengan nama distributinlist.txt , kemudian menyimpan semua member distribution nya.</p>
+        <div class="transbox"><font size="3">zimbra@zimbra:~$ mkdir /backups/zmigrate/distributinlist_members</br>zimbra@zimbra:~$ for i in `cat /backups/zmigrate/distributinlist.txt`; do zmprov gdlm $i > /backups/zmigrate/distributinlist_members/$i.txt ;echo "$i"; done
+          <br/>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com<br/></font></div>
+          
+        <p><b>4.6 Dapatkan semua password akun email</b></p>
+        <p>Sekarang kita akan menemukan password yang sudah di encrypt dari semua akun email lama anda dan menyimpannya di dalam folder bernama userpass/ sebagai berikut:</p>
+        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ mkdir userpass</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov  -l ga $i userPassword | grep userPassword: | awk '{ print $2}' > userpass/$i.shadow; done
+          <br/></font></div>
+      
       <footer>
         <p></p>
       </footer>
