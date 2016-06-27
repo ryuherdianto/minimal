@@ -54,8 +54,9 @@ No interruption on production server like software upgrade or service disable.
 Migrate zimbra from old version to a new version server
 Zimbra cross migrations without copying entire directories.</p>
 
-        <p>2. Requirement
-You need an old server with zmibra account and a new fresh server with the Os you wish. Dont’ create or make any custom configuration or setting in you new server. Please make sure to set your new servers hostname same as the old one.
+        <p>2. Requirement</p>
+
+        <p> You need an old server with zmibra account and a new fresh server with the Os you wish. Dont’ create or make any custom configuration or setting in you new server. Please make sure to set your new servers hostname same as the old one.
 
 Old server
 Need ssh root login
@@ -66,8 +67,9 @@ Must be installed with latest stable zimbra
 Need ssh root logins
 Need zimbra admin logins
 Enough HDD space to store backups
-3. Presetup
-You need to setup an ssh key from the new server’s root account to the old server’s root account.
+
+        <p>3. Presetup</p>
+<p>You need to setup an ssh key from the new server’s root account to the old server’s root account.
 Reduce the TTL of MX records of your domain to 500 seconds . So that you can easily switch the domain’s IP after migration. Please remember to schedule the migration task on non peek hours.
 
 Create a directory in both new and old server into which we store all required files and data for doing the migration</p>
