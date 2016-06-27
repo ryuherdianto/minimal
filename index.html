@@ -10,7 +10,7 @@
   background-color: #ffffff;
   border: 1px solid black;
   opacity: 0.6;
-  filter: alpha(opacity=60); /* For IE8 and earlier */
+  filter: alpha(opacity=30); /* For IE8 and earlier */
 }
 
 div.transbox p {
@@ -90,7 +90,7 @@ div.transbox p {
 Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task pada peek hour.
 
 Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
-<div class="transbox"><font size="2">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
+<div class="transbox"><font size="3">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
 <br/>[root@zimbra ~]# su - zimbra</font></div></p>
 
 
