@@ -90,7 +90,7 @@ div.transbox p {
         Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task tidak pada peek hour.
 
         Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
-        <div class="transbox"><font size="3" face="courier new">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
+        <div class="transbox"><font size="2" face="courier new">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
           <br/>[root@zimbra ~]# su - zimbra</font></div></p>
 
         <p>Semua langkah yang dilakukan pada server Zimbra anda harus dilakukan sebagai user Zimbra sendiri, jika tidak maka anda akan mendapatkan error permission dan masalah ownership pada server zimbra anda</p>
@@ -100,45 +100,45 @@ div.transbox p {
 
         <p><b>4.1 Mendapatkan semua nama domain</b></p>
         <p>Anda harus mendapatkan nama semua domain dari server yang lama. Kita akan menyimpan daftar domain dalam sebuah file bernama domains.txt. Anda harus mendapatkan semua daftar nama domain dengan cara berikut,</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:~$ cd /backups/zmigrate </br>zimbra@zimbra:/backups/zmigrate$ zmprov gad > domains.txt
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:~$ cd /backups/zmigrate </br>zimbra@zimbra:/backups/zmigrate$ zmprov gad > domains.txt
           <br/>zimbra@zimbra:/backups/zmigrate$ cat domains.txt<br/>medikaindo.com<br/>medikajabar.net<br/>zimbra@zimbra:/backups/zmigrate$</font></div>
 
         <p>Sekarang hapus semua domain dan subdomain yang terkait dengan hostname pada server anda , dari daftar domain ini (domains.txt) karena domain tersebut telah dibuat pada server baru anda. Sehingga tidak diperlukan untuk membuat domain baru dengan nama yang sama.</p>
 
         <p><b>4.2 Dapatkan semua akun admin</b></p>
         <P>Kebanyakan dari konfigurasi zimbra hanya memiliki satu admin. Tetapi ada juga yang memiliki lebih dari satu. Jadi akan lebih bijak jika kita mendapatkan semua akun admin. Kita akan menyimpan daftar admin di admins.txt</P>
-        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ zmprov gaaa > admins.txt</br>zimbra@zimbra:/backups/zmigrate$ cat admins.txt
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ zmprov gaaa > admins.txt</br>zimbra@zimbra:/backups/zmigrate$ cat admins.txt
           <br/>admin@medikaindo.com<br/>zimbra@zimbra:/backups/zmigrate<br/></font></div>
         
         <p><b>4.3 Mendapatkan semua akun email</b></p>
         <p>Langkah berikutnya adalah untuk mendapatkan semua akun email yang ada pada server lama anda. Dapatkan daftar dari akun email dan simpan dalam file emails.txt. Jadi dari file ini kita dapat melihat berapa banyak akun yang perlu di migrasi.</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ zmprov -l gaa >emails.txt</br>zimbra@zimbra:/backups/zmigrate$ cat emails.txt
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ zmprov -l gaa >emails.txt</br>zimbra@zimbra:/backups/zmigrate$ cat emails.txt
           <br/>gm@medianet.com<br/>admin@medianet.com<br/>andy@medianet.com<br/>zimbra@zimbra:/backups/zmigrate$</font></div>
         <p>Harap hapus semua akun email dari file /backups/zmigrate/emails.txt yang nama pertamanya seperti spam, virus, ham, galsync . Tidak diperlukan untuk me-restore account ini. Bahkan jika anda perlu untuk me-restore, anda masih dapat melakukannya.</p>
     
         <p><b>4.4 Dapatkan semua distribution list</b></p>
         <p>Anda harus mendapatkan semua distributions list dan menyimpannya dalam sebuah file bernama distributinlist.txt.</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:~$ zmprov gadl > /backups/zmigrate/distributinlist.txt</br>zimbra@zimbra:~$ cat /backups/zmigrate/distributinlist.txt
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:~$ zmprov gadl > /backups/zmigrate/distributinlist.txt</br>zimbra@zimbra:~$ cat /backups/zmigrate/distributinlist.txt
           <br/>finance@medianet.com<br/>sales@medianet.com<br/>info@medianet.com<br/>zimbra@zimbra:~$</font></div>
       
         <p><b>4.5 Dapatkan semua member dalam distribution list</b></p>
         <p>Dalam langkah ini kita akan mendapatkan semua member pada tiap distribution list ini. Kita akan membuat sebuah folder bernama distributinlist_members dan membuat sebuah file dalam folder ini dengan nama distributinlist.txt , kemudian menyimpan semua member distribution nya.</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:~$ mkdir /backups/zmigrate/distributinlist_members</br>zimbra@zimbra:~$ for i in `cat /backups/zmigrate/distributinlist.txt`; do zmprov gdlm $i > /backups/zmigrate/distributinlist_members/$i.txt ;echo "$i"; done
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:~$ mkdir /backups/zmigrate/distributinlist_members</br>zimbra@zimbra:~$ for i in `cat /backups/zmigrate/distributinlist.txt`; do zmprov gdlm $i > /backups/zmigrate/distributinlist_members/$i.txt ;echo "$i"; done
           <br/>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com<br/></font></div>
           
         <p><b>4.6 Dapatkan semua password akun email</b></p>
         <p>Sekarang kita akan menemukan password yang sudah di encrypt dari semua akun email lama anda dan menyimpannya di dalam folder bernama userpass/ sebagai berikut:</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ mkdir userpass</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov  -l ga $i userPassword | grep userPassword: | awk '{ print $2}' > userpass/$i.shadow; done
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ mkdir userpass</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov  -l ga $i userPassword | grep userPassword: | awk '{ print $2}' > userpass/$i.shadow; done
           <br/></font></div>
       
         <p><b>4.7 Backup semua user name , Display name dan Given Name</b></p>
         <p>Zimbra dapat menerima sebuah Name dan Disaplay names pada akun email dalam proses pembuatan akunnya. Jadi kita harus me-restore kembali data tersebut. Kita akan membuat sebuah directori dengan nama userdata/ yang berisi detail-detail dari tiap akun tersebut</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ mkdir userdata</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov ga $i  | grep -i Name: > userdata/$i.txt ; done
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ mkdir userdata</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov ga $i  | grep -i Name: > userdata/$i.txt ; done
           <br/></font></div>
           
         <p><b>4.8 Sekarang backup semua akun email</b></p>
         <p>Proses ini akan banyak menyita waktu untuk mem-backup semua akun-akun email anda. Jadi pastikan anda menjalankan utilitas “screen”. Sebuah file tgz akan dibuat untuk setiap nama email. Kita akan menggunakan file tersebut untuk men-transfer akun email.</p>
-        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ for email in `cat /backups/zmigrate/emails.txt`; do for i in `cat ../emails.txt `; do zmmailbox -z -m $i getRestURL '/?fmt=tgz' > $i.tgz ;  echo $email ; done</br>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ for email in `cat /backups/zmigrate/emails.txt`; do for i in `cat ../emails.txt `; do zmmailbox -z -m $i getRestURL '/?fmt=tgz' > $i.tgz ;  echo $email ; done</br>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com
           <br/></font></div>
           
         <p>File tgz ini berisi:</p>
