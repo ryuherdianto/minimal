@@ -86,27 +86,29 @@ div.transbox p {
 </ul>
 
         <p><b>3. Presetup</b></p>
-<p>Anda perlu untuk mengkonfigurasikan sebuah ssh key dari akun root server baru ke akun root server yang lama.
-Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task pada peek hour.
+        <p>Anda perlu untuk mengkonfigurasikan sebuah ssh key dari akun root server baru ke akun root server yang lama.
+        Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task pada peek hour.
 
-Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
-<div class="transbox"><font size="3">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
-<br/>[root@zimbra ~]# su - zimbra</font></div></p>
+        Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
+        <div class="transbox"><font size="3">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
+          <br/>[root@zimbra ~]# su - zimbra</font></div></p>
 
-<p>Semua langkah yang dilakukan pada server Zimbra anda harus dilakukan sebagai user Zimbra sendiri, jika tidak maka anda akan mendapatkan error permission dan masalah ownership pada server zimbra anda</p>
+        <p>Semua langkah yang dilakukan pada server Zimbra anda harus dilakukan sebagai user Zimbra sendiri, jika tidak maka anda akan mendapatkan error permission dan masalah ownership pada server zimbra anda</p>
 
         <p><b>4. Backup semua data dari Server Lama</b></p>
-<p>Kita akan meng-copy semua data dari server lama tanpa mengganggu services zimbra.</p>
+        <p>Kita akan meng-copy semua data dari server lama tanpa mengganggu services zimbra.</p>
 
         <p><b>4.1 Mendapatkan semua nama domain</b></p>
-<p>Anda harus mendapatkan nama semua domain dari server yang lama. Kita akan menyimpan daftar domain dalam sebuah file bernama domains.txt. Anda harus mendapatkan semua daftar nama domain dengan cara berikut,</p>
-<div class="transbox"><font size="3">zimbra@zimbra:~$ cd /backups/zmigrate </br>zimbra@zimbra:/backups/zmigrate$ zmprov gad > domains.txt
-<br/>zimbra@zimbra:/backups/zmigrate$ cat domains.txt<br/>medikaindo.com<br/>medikajabar.net<br/>zimbra@zimbra:/backups/zmigrate$</font></div>
+        <p>Anda harus mendapatkan nama semua domain dari server yang lama. Kita akan menyimpan daftar domain dalam sebuah file bernama domains.txt. Anda harus mendapatkan semua daftar nama domain dengan cara berikut,</p>
+        <div class="transbox"><font size="3">zimbra@zimbra:~$ cd /backups/zmigrate </br>zimbra@zimbra:/backups/zmigrate$ zmprov gad > domains.txt
+          <br/>zimbra@zimbra:/backups/zmigrate$ cat domains.txt<br/>medikaindo.com<br/>medikajabar.net<br/>zimbra@zimbra:/backups/zmigrate$</font></div>
 
-<p>Sekarang hapus semua domain dan subdomain yang terkait dengan hostname pada server anda , dari daftar domain ini (domains.txt) karena domain tersebut telah dibuat pada server baru anda. Sehingga tidak diperlukan untuk membuat domain baru dengan nama yang sama.</p>
+        <p>Sekarang hapus semua domain dan subdomain yang terkait dengan hostname pada server anda , dari daftar domain ini (domains.txt) karena domain tersebut telah dibuat pada server baru anda. Sehingga tidak diperlukan untuk membuat domain baru dengan nama yang sama.</p>
 
         <p><b>4.2 Dapatkan semua akun admin</b></p>
-        
+        <P>Kebanyakan dari konfigurasi zimbra hanya memiliki satu admin. Tetapi ada juga yang memiliki lebih dari satu. Jadi akan lebih bijak jika kita mendapatkan semua akun admin. Kita akan menyimpan daftar admin di admins.txt</P>
+        <div class="transbox"><font size="3">zimbra@zimbra:/backups/zmigrate$ zmprov gaaa > admins.txt</br>zimbra@zimbra:/backups/zmigrate$ cat admins.txt
+          <br/>admin@medikaindo.com<br/>medikajabar.net<br/></font></div>
         
       <footer>
         <p></p>
