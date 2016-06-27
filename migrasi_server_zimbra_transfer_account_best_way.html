@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Life is Innovation</title>
+    <style>
+    div.transbox {
+  margin: 10px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 6.6;
+  filter: alpha(opacity=30); /* For IE8 and earlier */
+}
+
+div.transbox p {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
+</style>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Life is Innovation</h1>
+        <p>life, learn, contribute</p>
+        <p class="view"><a href="http://github.com/orderedlist/minimal">View completed Projects<small></small></a></p>
+        <nav>
+        <ul>
+          <li><a href="/archives/">Archive</a></li>
+          <li><a href="/about/">About Me</a></li>
+          <li><a href="/calendar/">Calendar</a></li>
+        </ul>
+        </nav>
+      
+    <div>
+      <h2>Rizha Yuherdianto</h2>
+      <p>
+        A System Administrator lives in Jabodetabek. I speak about infrastructures and technology, and occasionally write at this page.
+      </p>
+    </div>
+    
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+</form>
+    
+      </header>
+      <section>
+        <h1>Migrasi Server Zimbra dan Transfer Account Zimbra – The Best Way </h1>
+
+        <font color="black"><p><b>1. Pendahuluan</b></p></font>
+
+        <p>Project Zimbra tidak memiliki dokumentasi sebuah cross migration atau transfer account yang baik. Yang mereka sarankan adalah dengan cara meng-copy folder /opt/zimbra ke server baru anda. Tetapi bagaimana jika file-file tersebut sudah terinfeksi dengan rootkit atau malicious script lainnya?, maka server baru kita akan ter-compromised. Jadi jangan pernah sync atau copy keseluruhan direktori dari folder instalasi zimbra kita. Zimbra juga menganjurkan kita untuk meng-upgrade production server kita ke versi terakhir sebelum melakukan migrasi. Tetapi dengan cara yang tidak tepat kita dapat teresiko kehilangan data. Dengan cara berikut anda dapat:</p>
+<ul>
+<li>Me-migrasi kan zimbra dari satu Operating System ke yang lainnya.</li>
+<li>Me-migrasi kan account zimbra antar hardware berbeda dan konfigurasi Operating systems yang berbeda.</li>
+<li>Tidak akan ada interupsi di sisi production server seperti software upgrade atau service disable.</li>
+<li>Migrasi zimbra dari versi lama ke versi yang lebih baru</li>
+<li>Cross migration Zimbra tanpa harus meng-copy keseluruhan direktori.</li>
+</ul>
+
+        <font color="black"><p><b>2. Requirement</b></p></font>
+
+        <p> Anda memerlukan server lama anda dengan akun zimbra dan sebuah server baru dengan OS yang anda inginkan. Jangan membuat menciptakan konfigurasi atau setting apapun pada server baru anda. Pastikan anda mengkonfigurasikan hostname server baru anda sama dengan server yang lama.</p>
+<ul>
+<li>Server lama</li>
+<li>Membutuhkan login ssh root</li>
+<li>Membutuhkan login admin zimbra</li>
+<li>Kapasitas HDD yang cukup untuk menyimpan backup</li>
+<li>Server baru</li>
+<li>Harus di install dengan stable zimbra terbaru</li>
+<li>Membutuhkan login ssh root</li>
+<li>Membutuhkan login zimbra admin</li>
+<li>Kapasitas HDD yang cukup untuk menyimpan backup</li>
+</ul>
+
+        <font color="black"><p><b>3. Presetup</b></p></font>
+        <p>Anda perlu untuk mengkonfigurasikan sebuah ssh key dari akun root server baru ke akun root server yang lama.
+        Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task tidak pada peek hour.
+
+        Buat sebuah direktori di kedua server baik yang baru maupun yang lama sebagai tempat kita akan menyimpan semua file-file dan data yang kita butuhkan dalam melakukan migrasi</p>
+        <div class="transbox"><font size="2" face="courier new">[root@zimbra ~]# mkdir /backups/zmigrate </br>[root@zimbra ~]# chown zimbra.zimbra /backups/zmigrate
+          <br/>[root@zimbra ~]# su - zimbra</font></div></p>
+
+        <p>Semua langkah yang dilakukan pada server Zimbra anda harus dilakukan sebagai user Zimbra sendiri, jika tidak maka anda akan mendapatkan error permission dan masalah ownership pada server zimbra anda</p>
+
+        <font color="black"><p><b>4. Backup semua data dari Server Lama</b></p></font>
+        <p>Kita akan meng-copy semua data dari server lama tanpa mengganggu services zimbra.</p>
+
+        <font color="black"><p><b>4.1 Mendapatkan semua nama domain</b></p></font>
+        <p>Anda harus mendapatkan nama semua domain dari server yang lama. Kita akan menyimpan daftar domain dalam sebuah file bernama domains.txt. Anda harus mendapatkan semua daftar nama domain dengan cara berikut,</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:~$ cd /backups/zmigrate </br>zimbra@zimbra:/backups/zmigrate$ zmprov gad > domains.txt
+          <br/>zimbra@zimbra:/backups/zmigrate$ cat domains.txt<br/>medikaindo.com<br/>medikajabar.net<br/>zimbra@zimbra:/backups/zmigrate$</font></div>
+
+        <p>Sekarang hapus semua domain dan subdomain yang terkait dengan hostname pada server anda , dari daftar domain ini (domains.txt) karena domain tersebut telah dibuat pada server baru anda. Sehingga tidak diperlukan untuk membuat domain baru dengan nama yang sama.</p>
+
+        <font color="black"><p><b>4.2 Dapatkan semua akun admin</b></p></font>
+        <P>Kebanyakan dari konfigurasi zimbra hanya memiliki satu admin. Tetapi ada juga yang memiliki lebih dari satu. Jadi akan lebih bijak jika kita mendapatkan semua akun admin. Kita akan menyimpan daftar admin di admins.txt</P>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ zmprov gaaa > admins.txt</br>zimbra@zimbra:/backups/zmigrate$ cat admins.txt
+          <br/>admin@medikaindo.com<br/>zimbra@zimbra:/backups/zmigrate<br/></font></div>
+        
+        <font color="black"><p><b>4.3 Mendapatkan semua akun email</b></p></font>
+        <p>Langkah berikutnya adalah untuk mendapatkan semua akun email yang ada pada server lama anda. Dapatkan daftar dari akun email dan simpan dalam file emails.txt. Jadi dari file ini kita dapat melihat berapa banyak akun yang perlu di migrasi.</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ zmprov -l gaa >emails.txt</br>zimbra@zimbra:/backups/zmigrate$ cat emails.txt
+          <br/>gm@medianet.com<br/>admin@medianet.com<br/>andy@medianet.com<br/>zimbra@zimbra:/backups/zmigrate$</font></div>
+        <p>Harap hapus semua akun email dari file /backups/zmigrate/emails.txt yang nama pertamanya seperti spam, virus, ham, galsync . Tidak diperlukan untuk me-restore account ini. Bahkan jika anda perlu untuk me-restore, anda masih dapat melakukannya.</p>
+    
+        <font color="black"><p><b>4.4 Dapatkan semua distribution list</b></p></font>
+        <p>Anda harus mendapatkan semua distributions list dan menyimpannya dalam sebuah file bernama distributinlist.txt.</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:~$ zmprov gadl > /backups/zmigrate/distributinlist.txt</br>zimbra@zimbra:~$ cat /backups/zmigrate/distributinlist.txt
+          <br/>finance@medianet.com<br/>sales@medianet.com<br/>info@medianet.com<br/>zimbra@zimbra:~$</font></div>
+      
+        <font color="black"><p><b>4.5 Dapatkan semua member dalam distribution list</b></p></font>
+        <p>Dalam langkah ini kita akan mendapatkan semua member pada tiap distribution list ini. Kita akan membuat sebuah folder bernama distributinlist_members dan membuat sebuah file dalam folder ini dengan nama distributinlist.txt , kemudian menyimpan semua member distribution nya.</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:~$ mkdir /backups/zmigrate/distributinlist_members</br>zimbra@zimbra:~$ for i in `cat /backups/zmigrate/distributinlist.txt`; do zmprov gdlm $i > /backups/zmigrate/distributinlist_members/$i.txt ;echo "$i"; done
+          <br/>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com<br/></font></div>
+          
+        <font color="black"><p><b>4.6 Dapatkan semua password akun email</b></p></font>
+        <p>Sekarang kita akan menemukan password yang sudah di encrypt dari semua akun email lama anda dan menyimpannya di dalam folder bernama userpass/ sebagai berikut:</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ mkdir userpass</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov  -l ga $i userPassword | grep userPassword: | awk '{ print $2}' > userpass/$i.shadow; done
+          <br/></font></div>
+      
+        <font color="black"><p><b>4.7 Backup semua user name , Display name dan Given Name</b></p></font>
+        <p>Zimbra dapat menerima sebuah Name dan Disaplay names pada akun email dalam proses pembuatan akunnya. Jadi kita harus me-restore kembali data tersebut. Kita akan membuat sebuah directori dengan nama userdata/ yang berisi detail-detail dari tiap akun tersebut</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ mkdir userdata</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov ga $i  | grep -i Name: > userdata/$i.txt ; done
+          <br/></font></div>
+          
+        <font color="black"><p><b>4.8 Sekarang backup semua akun email</b></p></font>
+        <p>Proses ini akan banyak menyita waktu untuk mem-backup semua akun-akun email anda. Jadi pastikan anda menjalankan utilitas “screen”. Sebuah file tgz akan dibuat untuk setiap nama email. Kita akan menggunakan file tersebut untuk men-transfer akun email.</p>
+        <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ for email in `cat /backups/zmigrate/emails.txt`; do for i in `cat ../emails.txt `; do zmmailbox -z -m $i getRestURL '/?fmt=tgz' > $i.tgz ;  echo $email ; done</br>andy@medianet.com<br/>mala@medianet.com<br/>cantika@medianet.com
+          <br/></font></div>
+          
+        <p>File tgz ini berisi:</p>
+        <ul>
+        <li>Mail</li>
+        <li>Contacts</li>
+        <li>Calendars</li>
+        <li>Briefcase</li>
+        <li>Tasks</li>
+        <li>Searches</li>
+        <li>Tags</li>
+        <li>Folders</li>
+        </ul>
+        
+        <p>Semua subfolder akan termasuk, kecuali Junk dan Trash. </p>
+          
+      <footer>
+        <p></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
