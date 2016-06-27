@@ -59,7 +59,7 @@ div.transbox p {
       <section>
         <h1>Migrasi Server Zimbra dan Transfer Account Zimbra – The Best Way </h1>
 
-        <p><font color="blue"><b>1. Pendahuluan</b</font></p>
+        <font color="blue"><p><b>1. Pendahuluan</b></p></font>
 
         <p>Project Zimbra tidak memiliki dokumentasi sebuah cross migration atau transfer account yang baik. Yang mereka sarankan adalah dengan cara meng-copy folder /opt/zimbra ke server baru anda. Tetapi bagaimana jika file-file tersebut sudah terinfeksi dengan rootkit atau malicious script lainnya?, maka server baru kita akan ter-compromised. Jadi jangan pernah sync atau copy keseluruhan direktori dari folder instalasi zimbra kita. Zimbra juga menganjurkan kita untuk meng-upgrade production server kita ke versi terakhir sebelum melakukan migrasi. Tetapi dengan cara yang tidak tepat kita dapat teresiko kehilangan data. Dengan cara berikut anda dapat:</p>
 <ul>
@@ -70,7 +70,7 @@ div.transbox p {
 <li>Cross migration Zimbra tanpa harus meng-copy keseluruhan direktori.</li>
 </ul>
 
-        <p><font color="blue"><b>2. Requirement</b></font></p>
+        <font color="blue"><p><b>2. Requirement</b></p></font>
 
         <p> Anda memerlukan server lama anda dengan akun zimbra dan sebuah server baru dengan OS yang anda inginkan. Jangan membuat menciptakan konfigurasi atau setting apapun pada server baru anda. Pastikan anda mengkonfigurasikan hostname server baru anda sama dengan server yang lama.</p>
 <ul>
@@ -85,7 +85,7 @@ div.transbox p {
 <li>Kapasitas HDD yang cukup untuk menyimpan backup</li>
 </ul>
 
-        <p><font color="blue"><b>3. Presetup</b></font></p>
+        <font color="blue"><p><b>3. Presetup</b></p></font>
         <p>Anda perlu untuk mengkonfigurasikan sebuah ssh key dari akun root server baru ke akun root server yang lama.
         Kurangi TTL dari MX record dari domain anda ke 500 detik. Sehingga anda dapat dengan mudah me-switch IP domain setelah migrasi. Harap di ingat untuk menjadwalkan migration task tidak pada peek hour.
 
