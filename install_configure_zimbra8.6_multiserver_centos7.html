@@ -7,7 +7,7 @@
     <style>
     div.transbox {
   margin: 10px;
-  background-color: #ffffff;
+  background-color: #F7EDAD;
   border: 1px solid black;
   opacity: 6.6;
   filter: alpha(opacity=30); /* For IE8 and earlier */
@@ -80,8 +80,12 @@ Zimbra LDAP server must be configured before the other servers to provide user a
 
 <p><b>Step 1:</b> Login as a root on ZIMBRA-LDAP.<br/>
 
-<b>Step 2:</b> Enter the fully qualified domain name in host file<br/></p>
+<b>Step 2:</b> Enter the fully qualified domain name in host file<br/>
 <div class="transbox"><font size="2" face="courier new"># vim /etc/hosts</br>172.25.10.175 zimbraldap.andalasmedia.net.id zimbra-ldap
+          <br/></font></div>
+
+<b>Step 3:</b> Create a backup directory and place the ZCS source file in /backup directory.<br/></p>
+<div class="transbox"><font size="2" face="courier new">[root@zimbra-ldap backup]# wget https://files.zimbra.com/downloads/8.6.0_GA/zcs-8.6.0_GA_1153.RHEL7_64.20141215151110.tgz
           <br/></font></div>
 
 <p></p>SysAdmin</p>
