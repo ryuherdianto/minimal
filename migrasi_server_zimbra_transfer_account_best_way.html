@@ -161,7 +161,7 @@ div.transbox p {
         
         <p>Semua subfolder akan termasuk, kecuali Junk dan Trash. </p>
           
-        <font color="black"><p><b>4.9 Now backup alias</b></p></font>
+        <font color="black"><p><b>4.9 Sekarang backup alias</b></p></font>
         <p>Terkadang sderver kita mungkin saja memiliki email alias untuk akun tertentu. Jadi anda perlu untuk meng-copy alias nya juga. Kita akan membuat sebuah sub folder bernama alias untuk menyimpan backup dari Alias.</p>
         <div class="transbox"><font size="2" face="courier new">zimbra@zimbra:/backups/zmigrate$ mkdir -p alias/</br>zimbra@zimbra:/backups/zmigrate$ for i in `cat emails.txt`; do zmprov ga  $i | grep zimbraMailAlias |awk '{print $2}' > alias/$i.txt ;echo $i ;done<br/>mala@medianet.com<br/>cantika@medianet.com
           <br/></font></div><br/>
@@ -173,22 +173,21 @@ div.transbox p {
         <font color="black"><p><b>4.10 Rsync folder ke server baru</b></p></font>
         <p>Sekarang kita memiliki semua data yang diperlukan agar dapat melakukan proses migrasi. Dengan langkah sebagai berikut :</p>
         <ul>
-          <li>/backups/zmigrate – Memiliki semua simpanan backups</li><br/>
-          <li>/backups/zmigrate/domains.txt – Berisi nama-nama domain</li><br/>
-          <li>/backups/zmigrate/emails.txt – Berisi daftar akun email</li><br/>
-          <li>/backups/zmigrate/distributinlist.txt – Berisi distribution list</li><br/>
-          <li>/backups/zmigrate/distributinlist_members – Berisi member dari tiap distribution</li><br/>
-          <li>/backups/zmigrate/userpass – Berisi password yang sudah di encrypted dari akun-akun email anda</li><br/>
-          <li>/backups/zmigrate/userdata – Berisi informasi akun email</li><br/>
-          <li>/backups/zmigrate/alias – Berisi semua alias dari akun-akun email anda</li><br/>
+          <li>/backups/zmigrate – Memiliki semua simpanan backups</li>
+          <li>/backups/zmigrate/domains.txt – Berisi nama-nama domain</li>
+          <li>/backups/zmigrate/emails.txt – Berisi daftar akun email</li>
+          <li>/backups/zmigrate/distributinlist.txt – Berisi distribution list</li>
+          <li>/backups/zmigrate/distributinlist_members – Berisi member dari tiap distribution</li>
+          <li>/backups/zmigrate/userpass – Berisi password yang sudah di encrypted dari akun-akun email anda</li>
+          <li>/backups/zmigrate/userdata – Berisi informasi akun email</li>
+          <li>/backups/zmigrate/alias – Berisi semua alias dari akun-akun email anda</li>
         </ul>
         <br/>
         <p></p>Juga folder /backups/zmigrate berisi banyak file zip berisi data yang ada pada semua email.<br/>
         Sekarang rsync file dengan cara berikut</p>
         <div class="transbox"><font size="2" face="courier new">root@newserver # rsync -avp -e 'ssh -p 22' root@old-server-ip:/backups/zmigrate /backups/
-          <br/></font></div><br/>
-      
-      
+          <br/></font></div>
+          
       <footer>
         <p></p>
       </footer>
