@@ -72,7 +72,7 @@ div.transbox p {
         <p><b>Dasar Konfigurasi Zimbra Multiserver</b></p>
         
         <iframe width='700' height='450' frameborder='0' src="https://docs.google.com/spreadsheets/d/1tdsaXdLez_pipZTi-s2RzJ2ZrRw2VfxJ55bW-xhtbMw/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-        <br/>
+        <br/><br/>
         <p><b>1) Installation of Zimbra LDAP Server</b><br/>
 
 Let’s start with the basic parameters to configure Zimbra LDAP server and make sure that the firewall is disabled, FQDN hostname and IP address assigned to the host.
@@ -81,6 +81,8 @@ Zimbra LDAP server must be configured before the other servers to provide user a
 <p><b>Step 1:</b> Login as a root on ZIMBRA-LDAP.<br/>
 
 <b>Step 2:</b> Enter the fully qualified domain name in host file<br/></p>
+<div class="transbox"><font size="2" face="courier new"># vim /etc/hosts</br>172.25.10.175 zimbraldap.andalasmedia.net.id zimbra-ldap
+          <br/></font></div>
 
 <p></p>SysAdmin</p>
 
