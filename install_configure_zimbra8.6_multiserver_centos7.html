@@ -84,9 +84,25 @@ Zimbra LDAP server must be configured before the other servers to provide user a
 <div class="transbox"><font size="2" face="courier new"># vim /etc/hosts</br>172.25.10.175 zimbraldap.andalasmedia.net.id zimbra-ldap
           <br/></font></div>
 
-<b>Step 3:</b> Create a backup directory and place the ZCS source file in /backup directory.<br/></p>
+<b>Step 3:</b> Create a backup directory and place the ZCS source file in /backup directory.<br/>
 <div class="transbox"><font size="2" face="courier new">[root@zimbra-ldap backup]# wget https://files.zimbra.com/downloads/8.6.0_GA/zcs-8.6.0_GA_1153.RHEL7_64.20141215151110.tgz
           <br/></font></div>
+
+<b>Step 4:</b> Change directory to /backup directory.<br/>
+<div class="transbox"><font size="2" face="courier new">#cd /backup
+          <br/></font></div>
+
+<b>Step 5:</b> Extract " zxvf zcs-8.6.0_GA_1153.RHEL7_64.20141215151110.tgz " in same directory.<br/>
+<div class="transbox"><font size="2" face="courier new">[root@zimbra-ldap backup]# tar zxvf zcs-8.6.0_GA_1153.RHEL7_64.20141215151110.tgz
+          <br/></font></div>
+          
+<b>Step 6:</b> Change directory to extracted folder then Start the setup and make sure that all prerequisites libraries are installed.<br/></p>
+<div class="transbox"><font size="2" face="courier new">#cd /backup</br>[root@zimbra-ldap backup]# cd zcs-8.6.0_GA_1153.RHEL7_64.20141215151110
+          <br/># ./install.sh --platform-override</font></div>
+
+<br/>Press "Y" to accept terms of software license agreement.
+
+<br/>Select "Y" for following packages that we need to install only and for rest options type "N"</p>
 
 <p></p>SysAdmin</p>
 
